@@ -1,11 +1,16 @@
 import React from 'react'
+import Facebook from '../storage/img/Facebook.svg'
+import Google from '../storage/img/Google.svg'
+import Apple from '../storage/img/Apple.svg'
+import Star from '../storage/img/Star.svg'
+import '../styles/LogIn.css'
 
 const LogIn = () => {
   return (
     <>
         <header>
             <div className="header__logo">
-                <img src="../storage/img/Star.svg"/>
+                <img src={Star}/>
             </div>
         </header>
         <main>
@@ -25,9 +30,9 @@ const LogIn = () => {
                     <span>Or Login with</span>
                 </div>
                 <div className="section__social">
-                    <button><img src="../storage/img/Facebook.svg"/></button>
-                    <button><img src="../storage/img/Google.svg"/></button>
-                    <button><img src="../storage/img/Apple.svg"/></button>
+                    <button><img src={Facebook}/></button>
+                    <button><img src={Google}/></button>
+                    <button><img src={Apple}/></button>
                 </div>
             </section>
         </main>

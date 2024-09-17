@@ -1,11 +1,13 @@
 import React from 'react'
+import Star from '../storage/img/Star.svg'
+import '../styles/SignUp.css'
 
 const SignUp = () => {
   return (
     <>
       <header>
             <div class="header__logo">
-                <img src="../storage/img/Star.svg"/>
+                <img src={Star}/>
             </div>
         </header>
         <main>

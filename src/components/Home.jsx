@@ -1,11 +1,13 @@
 import React from 'react'
+import Illustration from '../storage/img/Illustration.svg'
+import '../styles/Home.css'
 
 const Home = () => {
   return (
     <main>
         <section class="section__imagen">
             <div class="section__container">
-                <img src="./storage/img/Illustration.svg"/>
+                <img src={Illustration}/>
             </div>
             <div class="section__text">
                 <h1>Explore the app</h1>
