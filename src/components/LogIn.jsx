@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Facebook from '../storage/img/Facebook.svg'
 import Google from '../storage/img/Google.svg'
 import Apple from '../storage/img/Apple.svg'
@@ -16,10 +17,10 @@ const LogIn = () => {
         <main>
             <section className="section__form">
                 <h1>Log in</h1>
-                <form action="" method="post" class="login">
-                    <label htmlFor="">Email address</label>
+                <form action="" method="post" className="login">
+                    <label For="">Email address</label>
                     <input type="email" placeholder="helloworld@gmail.com"/>
-                    <label htmlFor="">Password</label>
+                    <label For="">Password</label>
                     <input type="password" placeholder="123456789"/>
                     <span>Forgot password?</span>
                     <input type="submit" placeholder="Log in"/>
@@ -37,7 +38,7 @@ const LogIn = () => {
             </section>
         </main>
         <footer>
-            <p>Don’t have an account? <b>Sign up</b></p>
+            <p>Don’t have an account? <b><Link to="/SignUp">Sign up</Link></b></p>
         </footer>
     </>
     

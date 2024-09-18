@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Star from '../storage/img/Star.svg'
 import '../styles/SignUp.css'
 
@@ -6,14 +7,14 @@ const SignUp = () => {
   return (
     <>
       <header>
-            <div class="header__logo">
+            <div className="header__logo">
                 <img src={Star}/>
             </div>
         </header>
         <main>
             <section className="section__form">
                 <h1>Create account</h1>
-                <form action="" method="post" class="login">
+                <form action="" method="post" className="login">
                     <label for="">Username</label>
                     <input type="text" placeholder="Your username"/>
                     <label for="">Email</label>
@@ -21,13 +22,12 @@ const SignUp = () => {
                     <label for="">Password</label>
                     <input type="password" value="123456789"/>
                     <span>I accept the terms and privacy policy</span>
-                    <input type="submit" value="Log in"/>
+                    <div className="button">
+                        <Link className="link" to="/LogIn">Log in</Link>
+                    </div>
                 </form>
             </section>
         </main>
-        <footer>
-            <p>Don’t have an account? <b>Sign up</b></p>
-        </footer>
     </>
   )
 }

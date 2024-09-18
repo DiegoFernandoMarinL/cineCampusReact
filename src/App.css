@@ -47,11 +47,11 @@ main{
     font-family: "Inter_18pt-SemiBold";
     font-size: 16px;
 }
-.section__button a:first-child{
+.section__button Link:first-child{
     background: #000;
     color: #fff;
 }
-.section__button a:last-child{
+.section__button Link:last-child{
     background: #fff;
     border: 1px solid #747474;
     color: #000;

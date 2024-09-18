@@ -122,4 +122,10 @@ footer{
 footer p+b{
     font-family: "Inter_18pt-SemiBold";
     font-size: 14px;
+    text-decoration: none;
+    color: inherit;
+}
+footer p b a {
+    text-decoration: none; 
+    color: inherit; 
 }

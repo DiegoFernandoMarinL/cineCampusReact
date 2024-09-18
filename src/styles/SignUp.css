@@ -77,16 +77,22 @@ main{
     margin-bottom: 38px;
 }
 
-.login input[type="submit"] {
+.link {
+    border: none;
+    outline: none;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 100%;
+    height: 56px;
+    font-family: "Inter_18pt-SemiBold";
+    font-size: 16px;
+}
+
+.link:first-child {
     background: #000;
     color: #fff;
 }
 
-footer{
-    /* background: red;  */
-    text-align: center;
-}
-footer p+b{
-    font-family: "Inter_18pt-SemiBold";
-    font-size: 14px;
-}
