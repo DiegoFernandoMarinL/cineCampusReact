@@ -16,12 +16,25 @@ app.use(express.json()); // Para manejar JSON
 app.get('/', async (req, res) => {
   try {
     const collection = await connectMongo();
-    console.log(collection);
       // Conectar a la base de datos
     const usuarios = await collection.find().toArray();  // Obtener todos los documentos
     res.status(200).json(usuarios);
   } catch (error) {
     console.error('Error al obtener usuarios:', error);
+    res.status(500).send('Error en el servidor');
+  }
+});
+// Ruta para crear un usuario
+app.post('/', async (req, res) => {
+  const nuevoUsuario = req.body
+  console.log(nuevoUsuario)
+  try {
+    const collection = await connectMongo();
+      // Conectar a la base de datos
+    const usuarios = await collection.insertOne(nuevoUsuario);
+    res.status(200).json(usuarios);
+  } catch (error) {
+    console.error('Error al insertar usuario:', error);
     res.status(500).send('Error en el servidor');
   }
 });
