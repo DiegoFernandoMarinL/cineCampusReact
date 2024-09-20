@@ -68,6 +68,7 @@ app.post('/', async (req, res) => {
     const collection = await connectMongo();
       // Conectar a la base de datos
     const usuarios = await collection.insertOne(nuevoUsuario);
+    /* const usuarioDB = await collection.createUser() */
     res.status(200).json(usuarios);
   } catch (error) {
     console.error('Error al insertar usuario:', error);

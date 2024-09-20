@@ -57,7 +57,7 @@ const SignUp = () => {
                     placeholder="Your username"
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
-                    onBlur={validarNombre} // Ejecutamos la validación al escribir
+                    onBlur={validarNombre}
                     required
                   />
 
@@ -67,7 +67,7 @@ const SignUp = () => {
                     placeholder="Your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    onBlur={validarCorreo} // Validamos el email al escribir
+                    onBlur={validarCorreo}
                     required
                   />
 
@@ -77,7 +77,7 @@ const SignUp = () => {
                     placeholder="Your password"
                     value={pass}
                     onChange={(e) => setPass(e.target.value)}
-                    onBlur={validarPassword} // Validamos la contraseña al escribir
+                    onBlur={validarPassword}
                     required
                   />
 
