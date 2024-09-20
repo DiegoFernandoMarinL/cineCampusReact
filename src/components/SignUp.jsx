@@ -9,50 +9,36 @@ const SignUp = () => {
     const [nombre, setNombre] = useState('');
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
-    const [error, setError] = useState('');
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+      e.preventDefault();
 
-        const errorNombre = validarNombre(nombre);
-        const errorEmail = validarCorreo(email);
-        const errorPassword = validarPassword(pass);
-        
-        if (errorNombre || errorEmail || errorPassword) {
-          setError({
-            nombre: errorNombre,
-            email: errorEmail,
-            pass: errorPassword
-          });
-        } else {
-          const usuario = {
-            nombre,
-            email,
-            pass,
-          };
-      
-          try {
-            const response = await fetch('http://localhost:5000/', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(usuario)
-            });
-      
-            const data = await response.json();
-            console.log('Usuario creado:', data);
-      
-            // Limpia el formulario después de enviar
-            setNombre('');
-            setEmail('');
-            setPass('');
-            navigate('/LogIn');
-          } catch (error) {
-            console.error('Error al crear usuario:', error);
-          }
-        }
-        
+      const usuario = {
+        nombre,
+        email,
+        pass,
+      };
+  
+      try {
+        const response = await fetch('http://localhost:5000/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(usuario)
+        });
+  
+        const data = await response.json();
+        console.log('Usuario creado:', data);
+  
+        // Limpia el formulario después de enviar
+        setNombre('');
+        setEmail('');
+        setPass('');
+        navigate('/LogIn');
+      } catch (error) {
+        console.error('Error al crear usuario:', error);
+      }        
     };
     return (
         <>
@@ -71,7 +57,7 @@ const SignUp = () => {
                     placeholder="Your username"
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
-                    onInput={validarNombre} // Ejecutamos la validación al escribir
+                    onBlur={validarNombre} // Ejecutamos la validación al escribir
                     required
                   />
 
@@ -81,7 +67,7 @@ const SignUp = () => {
                     placeholder="Your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    onInput={validarCorreo} // Validamos el email al escribir
+                    onBlur={validarCorreo} // Validamos el email al escribir
                     required
                   />
 
@@ -91,7 +77,7 @@ const SignUp = () => {
                     placeholder="Your password"
                     value={pass}
                     onChange={(e) => setPass(e.target.value)}
-                    onInput={validarPassword} // Validamos la contraseña al escribir
+                    onBlur={validarPassword} // Validamos la contraseña al escribir
                     required
                   />
 

@@ -24,6 +24,42 @@ app.get('/', async (req, res) => {
     res.status(500).send('Error en el servidor');
   }
 });
+//Ruta para validar el nombre de un usuario
+app.get('/validar-nombre', async (req, res) => {
+  const nombre = req.query.nombre;
+
+  try {
+      const collection = await connectMongo();
+      const cliente = await collection.findOne({ nombre: nombre });
+
+      if (cliente) {
+          res.json({ valido: false, mensaje: 'El nombre ya existe en la base de datos' });
+      } else {
+          res.json({ valido: true });
+      }
+  } catch (error) {
+      console.error('Error al consultar la base de datos:', error);
+      res.status(500).json({ valido: false, mensaje: 'Error en el servidor' });
+  }
+});
+//Ruta para validar el correo de un usuario
+app.get('/validar-correo', async (req, res) => {
+  const correo = req.query.email;
+
+  try {
+      const collection = await connectMongo();
+      const cliente = await collection.findOne({ email: correo });
+
+      if (cliente) {
+          res.json({ valido: false, mensaje: 'El correo ya existe en la base de datos' });
+      } else {
+          res.json({ valido: true });
+      }
+  } catch (error) {
+      console.error('Error al consultar la base de datos:', error);
+      res.status(500).json({ valido: false, mensaje: 'Error en el servidor' });
+  }
+});
 // Ruta para crear un usuario
 app.post('/', async (req, res) => {
   const nuevoUsuario = req.body
