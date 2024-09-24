@@ -19,9 +19,13 @@ header {
 }
 
 .header__logo {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+    position: absolute;
+    width: 250px; 
+    height: 250px;
+    margin: 0 auto;
+}
+.header__logo img{
+    
 }
 main{
     margin-bottom: 50px;

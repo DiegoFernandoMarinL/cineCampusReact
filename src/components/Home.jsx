@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Illustration from '../storage/img/Illustration.svg'
+import logo from '../storage/img/logo1.png'
 import styles from '../styles/Home.module.css'
 
 const Home = () => {
@@ -8,11 +8,10 @@ const Home = () => {
     <main>
         <section className={styles.section__imagen}>
             <div className={styles.section__container}>
-                <img src={Illustration}/>
+                <img src={logo}/>
             </div>
             <div className={styles.section__text}>
-                <h1>Explore the app</h1>
-                <small>Now your finances are in one place and always under control</small>
+                <small>Cinema is magic that unfolds on screen.</small>
             </div>
         </section>
         <section className={styles.section__button}>

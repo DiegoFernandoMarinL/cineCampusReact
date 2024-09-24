@@ -44,14 +44,14 @@ const LogIn = () => {
     return (
     <>
         <header>
-            <div className="header__logo">
+            <div className={styles.header__logo}>
                 <img src={Star}/>
             </div>
         </header>
         <main>
-            <section className="section__form">
+            <section className={styles.section__form}>
                 <h1>Log in</h1>
-                <form action="" method="post" className="login" onSubmit={handleSubmit}>
+                <form action="" method="post" className={styles.login} onSubmit={handleSubmit}>
                     <label For="">Email address</label>
                     <input 
                         type="email"
@@ -72,15 +72,15 @@ const LogIn = () => {
                     />
                     <span>Forgot password?</span>
                     <div>
-                        <button type="submit" className="link">Log in</button>
+                        <button type="submit" className={styles.link}>Log in</button>
                     </div>
                 </form>
             </section>
             <section>
-                <div className="section__line">
+                <div className={styles.section__line}>
                     <span>Or Login with</span>
                 </div>
-                <div className="section__social">
+                <div className={styles.section__social}>
                     <button><img src={Facebook}/></button>
                     <button><img src={Google}/></button>
                     <button><img src={Apple}/></button>
