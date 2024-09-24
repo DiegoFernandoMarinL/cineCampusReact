@@ -1,0 +1,15 @@
+.section__movies{
+    /* background: red; */
+    display: flex;
+    width: 95.7vw;
+    overflow-x: scroll;
+}
+.container__movie{
+
+}
+.container__movie img{
+    width: 40vw;
+}
+.container__movie div{
+    color:#ffffff
+}

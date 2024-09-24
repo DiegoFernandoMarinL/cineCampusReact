@@ -1,4 +1,5 @@
 import React from 'react'
+import MoviesOn from './MoviesOn'
 import styles from '../styles/Homeapp.module.css'
 import bell from '../storage/img/bell.svg'
 import profile from '../storage/img/profile.svg'
@@ -24,7 +25,7 @@ export const Homeapp = () => {
           <h4>Now playing</h4>
           <p>See all</p>
         </div>
-        {/* componente movie */}
+        <MoviesOn />
       </section>
       <section className={styles.section__coming_soon}>
         <div className={styles.container__text}>

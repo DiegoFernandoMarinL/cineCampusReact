@@ -1,5 +1,8 @@
-.container__main{
+body{
     background: #111111;
+}
+.container__main{
+
 }
 .section__greeting{
     /* background: red; */
