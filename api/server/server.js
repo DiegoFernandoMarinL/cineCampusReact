@@ -13,12 +13,48 @@ app.use(express.json()); // Para manejar JSON
     res.send('Servidor Express funcionando correctamente');
   }); */
 // Ruta para obtener todos los usuarios
-app.get('/', async (req, res) => {
+app.get('/movie', async (req, res) => {
   try {
-    const collection = await connectMongo();
-      // Conectar a la base de datos
-    const usuarios = await collection.find().toArray();  // Obtener todos los documentos
-    res.status(200).json(usuarios);
+    const db = await connectMongo();
+    const collection = db.collection('funcion');
+    // Conectar a la base de datos
+    const movies = await collection.aggregate([
+      {
+        "$lookup": {
+          "from": "pelicula",
+          "localField": "id_pelicula",
+          "foreignField": "_id",
+          "as": "pelicula"
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "pelicula": { "$arrayElemAt": ["$pelicula", 0] }  /* Obtener todo el documento de 'pelicula' */
+        }
+      },
+      {
+        "$group": {
+          "_id": "$pelicula.titulo",  /* Agrupamos por el título */
+          "peliculaData": { "$first": "$pelicula" }  /* Guardamos la información completa de 'pelicula' */
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "titulo": "$peliculaData.titulo",
+          "sinopsis": "$peliculaData.sinopsis",  /* Por ejemplo, traer el director */
+          "caratula": "$peliculaData.caratula",  /* Traer el año de la película */
+          "genero": "$peliculaData.genero"  /* Traer el género de la película */
+        }
+      },
+      {
+        "$sort": {
+          "titulo": 1  /* Orden ascendente por el título */
+        }
+      }           
+    ]).toArray();  // Obtener todos los documentos
+    res.status(200).json(movies);
   } catch (error) {
     console.error('Error al obtener usuarios:', error);
     res.status(500).send('Error en el servidor');
