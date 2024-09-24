@@ -1,0 +1,21 @@
+.container__main{
+    background: #111111;
+}
+.section__greeting{
+    background: red;
+}
+.container__greeting{
+    background: green;
+}
+.section_search{
+    
+}
+.section__movies{
+    background: blue;
+}
+.container__text{
+    background: yellow;
+}
+.section__coming_soon{
+    background: orange;
+}

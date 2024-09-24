@@ -4,7 +4,7 @@ import Facebook from '../storage/img/Facebook.svg'
 import Google from '../storage/img/Google.svg'
 import Apple from '../storage/img/Apple.svg'
 import Star from '../storage/img/Star.svg'
-import '../styles/LogIn.css'
+import styles from '../styles/LogIn.module.css'
 
 const LogIn = () => {
     const [nombre, setNombre] = useState('');
