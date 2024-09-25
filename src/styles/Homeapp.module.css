@@ -54,6 +54,15 @@
 .section__movies{
 }
 .container__text{
+    height: 10vw;
+}
+.section__moviesOn {
+    display: flex;
+    overflow-x: scroll; /* Permite que las películas se desplacen horizontalmente si no caben */
+    gap: 1rem; /* Espacio entre películas */
+    padding: 1rem;
+}
+.container__text{
     /* background: yellow; */
     display: flex;
     justify-content: space-between;

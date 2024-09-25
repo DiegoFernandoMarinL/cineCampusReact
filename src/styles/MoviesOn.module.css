@@ -1,15 +1,26 @@
-.section__movies{
-    /* background: red; */
+.container__movie {
     display: flex;
-    width: 95.7vw;
-    overflow-x: scroll;
+    flex-direction: column; /* Asegura que la imagen esté encima del título */
+    align-items: center;
+    width: 150px; /* Ancho de cada tarjeta de película */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para darle un efecto de tarjeta */
 }
-.container__movie{
 
+.container__movie img {
+    border-radius: 8px; /* Bordes redondeados */
+    width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
 }
-.container__movie img{
-    width: 40vw;
-}
+
 .container__movie div{
-    color:#ffffff
+    width: 40vw;
+    height: 14vh;
+    /* background: red; */
+    color:#ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: clamp(10px, 2vw, 24px);
+    text-align: center;
 }

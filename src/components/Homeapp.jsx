@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import MoviesOn from './MoviesOn'
 import styles from '../styles/Homeapp.module.css'
 import bell from '../storage/img/bell.svg'
@@ -6,6 +6,22 @@ import profile from '../storage/img/profile.svg'
 import lupa from '../storage/img/lupa.svg'
 
 export const Homeapp = () => {
+  const [peliculas, setPelicula] = useState([]);
+
+    useEffect(() => {
+      // Creamos una función asíncrona dentro de useEffect
+      const fetchPelicula = async () => {
+          try {
+              const response = await fetch('http://localhost:5000/movie'); // Llama a tu backend
+              const data = await response.json(); 
+              setPelicula(data); // Guarda los datos en el estado
+              console.log(data);               
+            } catch (error) {
+              console.error('Error al obtener los datos de la película:', error);
+            }
+          };
+          fetchPelicula(); // Ejecutamos la función
+    }, []); 
   return (
     <div className={styles.container__main}>
       <section className={styles.section__greeting}>
@@ -25,7 +41,15 @@ export const Homeapp = () => {
           <h4>Now playing</h4>
           <p>See all</p>
         </div>
-        <MoviesOn />
+        <div className={styles.section__moviesOn}>
+          {peliculas.map((pelicula) => (
+              <MoviesOn
+              caratula={pelicula.caratula}
+              titulo={pelicula.titulo}
+              genero={pelicula.genero}
+              />
+          ))}
+        </div>
       </section>
       <section className={styles.section__coming_soon}>
         <div className={styles.container__text}>
