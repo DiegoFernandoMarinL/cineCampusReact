@@ -4,13 +4,12 @@
     justify-content: space-between;
     align-items: center;
     height: 6vh;
-    background: red;
+    margin-bottom: 10px;
 }
 .container__header h4{
     margin: 0;
-    font-size: 10px;  
+    font-size: 20px;  
 }
 .container__header img{
-    width: 80%;
-    height: 80%;
+    height: 100%;
 }

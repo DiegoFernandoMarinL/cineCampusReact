@@ -14,8 +14,7 @@ export const Homeapp = () => {
           try {
               const response = await fetch('http://localhost:5000/movie'); // Llama a tu backend
               const data = await response.json(); 
-              setPelicula(data); // Guarda los datos en el estado
-              console.log(data);               
+              setPelicula(data); // Guarda los datos en el estado             
             } catch (error) {
               console.error('Error al obtener los datos de la película:', error);
             }
@@ -44,6 +43,7 @@ export const Homeapp = () => {
         <div className={styles.section__moviesOn}>
           {peliculas.map((pelicula) => (
               <MoviesOn
+              id={pelicula._id}
               caratula={pelicula.caratula}
               titulo={pelicula.titulo}
               genero={pelicula.genero}

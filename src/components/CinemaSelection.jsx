@@ -1,20 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Header from './header'
 import styles from '../styles/CinemaSelection.module.css'
 import movieTest from '../storage/img/logo1.png'
 import star from '../storage/img/star.png'
 
 export const CinemaSelection = () => {
+    const { id } = useParams(); 
+    const [movie, setMovie] = useState(null);
+
+    useEffect(() => {
+        // Simulación de una llamada a una API para obtener los detalles de la película
+        const fetchMovieDetails = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/movie/${id}`);
+                const data = await response.json();
+                console.log(data);
+                setMovie(data); // Guarda los detalles de la película en el estado
+            } catch (error) {
+                console.error("Error al obtener los detalles de la película:", error);
+            }
+        };
+
+        fetchMovieDetails();
+    }, [id]);
+
+    if (!movie) {
+        return <div style={{ color: 'white' }}>Cargando...</div>;
+    }
   return (
     <div>
         <Header />
         <div className={styles.container__image}>
-            <img src={movieTest} alt="" />
+            <img src={movie[0].caratula} alt="" />
         </div>
         <div className={styles.detail__movie}>
-            <h1>name</h1>
-            <span>genero</span>
-            <p>sinopsis</p>
+            <h1>{movie[0].titulo}</h1>
+            <span>{movie[0].genero}</span>
+            <p>{movie[0].sinopsis}</p>
             <div className={styles.container__ranking}>
                 <img src={star} alt="" />
                 <h3>ranking</h3>

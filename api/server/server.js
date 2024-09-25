@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { connectMongo } = require('../db/connect');
+const { ObjectId } = require('mongodb');
 
 const app = express();
 const port = 5000;
@@ -13,6 +14,19 @@ app.use(express.json()); // Para manejar JSON
     res.send('Servidor Express funcionando correctamente');
   }); */
 // Ruta para obtener todos los usuarios
+app.get('/movie/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const db = await connectMongo();
+    const collection = db.collection('pelicula');
+    // Conectar a la base de datos
+    const movie = await collection.find({_id: new ObjectId({id})}).toArray();
+    res.status(200).json(movie);
+  } catch (error) {
+    console.error('Error al obtener los datos de la pelicula:', error);
+    res.status(500).send('Error en el servidor');
+  }
+});
 app.get('/movie', async (req, res) => {
   try {
     const db = await connectMongo();
@@ -41,7 +55,7 @@ app.get('/movie', async (req, res) => {
       },
       {
         "$project": {
-          "_id": 0,
+          "_id": "$peliculaData._id",
           "titulo": "$peliculaData.titulo",
           "sinopsis": "$peliculaData.sinopsis",  /* Por ejemplo, traer el director */
           "caratula": "$peliculaData.caratula",  /* Traer el año de la película */
