@@ -1,4 +1,5 @@
 import React from 'react'
+import Header from './header'
 import styles from '../styles/CinemaSelection.module.css'
 import movieTest from '../storage/img/logo1.png'
 import star from '../storage/img/star.png'
@@ -6,7 +7,7 @@ import star from '../storage/img/star.png'
 export const CinemaSelection = () => {
   return (
     <div>
-        {/* componenete header */}
+        <Header />
         <div className={styles.container__image}>
             <img src={movieTest} alt="" />
         </div>
