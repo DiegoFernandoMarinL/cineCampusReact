@@ -4,9 +4,11 @@ import styles from '../styles/ChooseSeat.module.css'
 const TicketPrice = ({ price }) => {
   return (
     <div className={styles.ticketPrice}>
-      <p>Price</p>
-      <h2>{price}</h2>
-      <button className={styles.buyButton}>Buy ticket</button>
+      <div>
+        <p>Price</p>
+        <h2>{price}</h2>
+      </div>  
+      <button className={styles.buyButton}><strong>Buy ticket</strong></button>
     </div>
   );
 };

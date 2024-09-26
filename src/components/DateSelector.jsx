@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../styles/ChooseSeat.module.css'
 
 const DateSelector = ({ selectedDay, setSelectedDay }) => {
-  const days = ['Fri 17', 'Sat 18', 'Sun 19', 'Mon 20', 'Tue 21'];
+  const days = ['Fri 17', 'Sat 18', 'Sun 19', 'Mon 20', 'Tue 21', 'Wed 22', 'Thu 23'];
 
   return (
     <div className={styles.dateSelector}>
