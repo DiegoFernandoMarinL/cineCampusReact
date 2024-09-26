@@ -10,10 +10,36 @@ const port = 5000;
 app.use(cors());
 app.use(express.json()); // Para manejar JSON
 
-/* app.get('/', (req, res) => {
-    res.send('Servidor Express funcionando correctamente');
-  }); */
-// Ruta para obtener todos los usuarios
+app.get('/seatOn/:id', async (req, res) => {
+  const id = req.params.id;  
+  try {
+    const db = await connectMongo();
+    const collection = db.collection('funcion');
+    const val = await collection.aggregate(
+        [
+          {
+            $unwind: "$asiento"
+          },
+          {
+            $match: {
+              "_id": new ObjectId({id}),
+              "asiento.estado": "ocupado"
+            }
+          },
+          {
+            $group: {
+              _id: "$_id",
+              asientos_ocupados: { $push: "$asiento.codigo" }
+            }
+          }
+        ]
+    ).toArray();    
+    res.status(200).json(val);
+  } catch (error) {
+    console.error('Error al obtener los asientos de la funcion:', error);
+    res.status(500).send('Error en el servidor');  
+  }
+});
 app.get('/movie/:id', async (req, res) => {
   try {
     const id = req.params.id;
@@ -43,30 +69,32 @@ app.get('/movie', async (req, res) => {
       },
       {
         "$project": {
-          "_id": 0,
-          "pelicula": { "$arrayElemAt": ["$pelicula", 0] }  /* Obtener todo el documento de 'pelicula' */
+          "_id": 1,  /* Incluimos el _id de la función */
+          "pelicula": { "$arrayElemAt": ["$pelicula", 0] }  /* Obtener el primer (y único) documento de 'pelicula' */
         }
       },
       {
         "$group": {
-          "_id": "$pelicula.titulo",  /* Agrupamos por el título */
-          "peliculaData": { "$first": "$pelicula" }  /* Guardamos la información completa de 'pelicula' */
+          "_id": "$_id",  /* Agrupamos por el _id de la función */
+          "peliculaData": { "$first": "$pelicula" },  /* Guardamos la información completa de 'pelicula' */
+          "funcionId": { "$first": "$_id" }  /* Guardamos el _id de la función */
         }
       },
       {
         "$project": {
-          "_id": "$peliculaData._id",
+          "_id": "$funcionId",  /* Proyectamos el _id de la función */
+          "peliculaId": "$peliculaData._id",  /* Proyectamos el _id de la película */
           "titulo": "$peliculaData.titulo",
-          "sinopsis": "$peliculaData.sinopsis",  /* Por ejemplo, traer el director */
-          "caratula": "$peliculaData.caratula",  /* Traer el año de la película */
-          "genero": "$peliculaData.genero"  /* Traer el género de la película */
+          "sinopsis": "$peliculaData.sinopsis",
+          "caratula": "$peliculaData.caratula",
+          "genero": "$peliculaData.genero"
         }
       },
       {
         "$sort": {
           "titulo": 1  /* Orden ascendente por el título */
         }
-      }           
+      }
     ]).toArray();  // Obtener todos los documentos
     res.status(200).json(movies);
   } catch (error) {

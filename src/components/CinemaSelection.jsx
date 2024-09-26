@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Header from './header'
 import styles from '../styles/CinemaSelection.module.css'
-import movieTest from '../storage/img/logo1.png'
 import star from '../storage/img/star.png'
 
 export const CinemaSelection = () => {
-    const { id } = useParams(); 
+    const navigate = useNavigate();
+    const { id, id_funcion } = useParams(); 
     const [movie, setMovie] = useState(null);
 
     useEffect(() => {
@@ -15,15 +15,18 @@ export const CinemaSelection = () => {
             try {
                 const response = await fetch(`http://localhost:5000/movie/${id}`);
                 const data = await response.json();
-                console.log(data);
                 setMovie(data); // Guarda los detalles de la película en el estado
             } catch (error) {
                 console.error("Error al obtener los detalles de la película:", error);
             }
         };
-
         fetchMovieDetails();
     }, [id]);
+
+    const handleClick = () => {
+        // Redirige al detalle de la película usando el id
+        navigate(`/ChooseSeat/${id_funcion}`);
+    }; 
 
     if (!movie) {
         return <div style={{ color: 'white' }}>Cargando...</div>;
@@ -51,8 +54,8 @@ export const CinemaSelection = () => {
                 <img src="" alt="" />
             </div>
         </div>
-        <div className={styles.container__button}>
-            <Link className={styles.link}to="/ChooseSeat">Book now</Link>
+        <div className={styles.container__button} onClick={handleClick}>
+            <button className={styles.link}>Book now</button>
         </div>
     </div>
   )

@@ -43,10 +43,11 @@ export const Homeapp = () => {
         <div className={styles.section__moviesOn}>
           {peliculas.map((pelicula) => (
               <MoviesOn
-              id={pelicula._id}
+              id={pelicula.peliculaId}
               caratula={pelicula.caratula}
               titulo={pelicula.titulo}
               genero={pelicula.genero}
+              id_funcion={pelicula._id}
               />
           ))}
         </div>

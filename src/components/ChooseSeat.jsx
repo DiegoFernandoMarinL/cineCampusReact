@@ -1,16 +1,19 @@
 import Header from './header';
 import screen from '../storage/img/screen.svg'
 import styles from '../styles/ChooseSeat.module.css'
-import React, { useState } from 'react';
-import SeatSelector from './SeatSelector';
-import DateSelector from './DateSelector';
-import TimeSelector from './TimeSelector';
-import TicketPrice from './TicketPrice';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import SeatSelector from './seatSelector';
+import DateSelector from './dateSelector';
+import TimeSelector from './timeSelector';
+import TicketPrice from './ticketPrice';
 
 const ChooseSeat = () => {
+  const { id_funcion } = useParams();
   const [selectedSeat, setSelectedSeat] = useState(null);
   const [selectedDay, setSelectedDay] = useState('Fri 17');
   const [selectedTime, setSelectedTime] = useState('13:00');
+  const [seat, setSeat] = useState([]);
 
   const seats = [
     ['A1', 'A2', 'A3', 'A4', 'A5'],
@@ -21,7 +24,27 @@ const ChooseSeat = () => {
     ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9'],
   ];
 
-  const reservedSeats = ['A1', 'B3', 'C4'];
+  useEffect(() => {
+    // Creamos una función asíncrona dentro de useEffect
+    const fetchSeat = async () => {
+        try {
+            const response = await fetch(`http://localhost:5000/seatOn/${id_funcion}`);
+            const data = await response.json(); 
+            setSeat(data); // Guarda los datos en el estado  
+          } catch (error) {
+            console.error('Error al obtener los asientos de la funcion:', error);
+          }
+        };
+        fetchSeat(); // Ejecutamos la función
+  }, [id_funcion]); 
+
+  useEffect(() => {
+    if (seat.length > 0) {
+      console.log('Asientos actualizados:', seat);
+    }
+  }, [seat]);
+
+  const reservedSeats = seat.length > 0 ? seat[0].asientos_ocupados : [];
 
   return (
     <div className={styles.seatBooking}>

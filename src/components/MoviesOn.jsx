@@ -2,12 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/MoviesOn.module.css';
 
-export const MoviesOn = ({id, caratula, titulo, genero}) => { 
+export const MoviesOn = ({id, caratula, titulo, genero, id_funcion}) => { 
   const navigate = useNavigate();
 
   const handleClick = () => {
     // Redirige al detalle de la película usando el id
-    navigate(`/CinemaSelection/${id}`);
+    navigate(`/CinemaSelection/${id}/${id_funcion}`);
   };   
   return (
     <div className={styles.container__movie} onClick={handleClick}>

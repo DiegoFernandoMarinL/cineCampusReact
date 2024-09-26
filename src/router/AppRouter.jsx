@@ -13,8 +13,8 @@ const AppRouter = () => {
       <Route path="/LogIn" element={<LogIn />} />
       <Route path="/SignUp" element={<SignUp />} />
       <Route path="/HomeApp" element={<Homeapp />} />
-      <Route path="/CinemaSelection/:id" element={<CinemaSelection />} />
-      <Route path="/ChooseSeat" element={<ChooseSeat />} />
+      <Route path="/CinemaSelection/:id/:id_funcion" element={<CinemaSelection />} />
+      <Route path="/ChooseSeat/:id_funcion" element={<ChooseSeat />} />
       <Route path="/*" element={<Navigate to="/" />}/>
     </Routes>  
   )
