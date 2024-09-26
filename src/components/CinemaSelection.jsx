@@ -40,7 +40,7 @@ export const CinemaSelection = () => {
             <p>{movie[0].sinopsis}</p>
             <div className={styles.container__ranking}>
                 <img src={star} alt="" />
-                <h3>ranking</h3>
+                <h3>{movie[0].ranking}</h3>
             </div>
         </div>
         <div className={styles.container__place}>
@@ -50,6 +50,9 @@ export const CinemaSelection = () => {
                 <span>Auditorium</span>
                 <img src="" alt="" />
             </div>
+        </div>
+        <div className={styles.container__button}>
+            <button><strong>Book now</strong></button>
         </div>
     </div>
   )
