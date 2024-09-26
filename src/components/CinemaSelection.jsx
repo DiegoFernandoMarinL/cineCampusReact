@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Header from './header'
 import styles from '../styles/CinemaSelection.module.css'
 import movieTest from '../storage/img/logo1.png'
@@ -30,7 +30,7 @@ export const CinemaSelection = () => {
     }
   return (
     <div>
-        <Header />
+        <Header text={"Cinema Selection"}/>
         <div className={styles.container__image}>
             <img src={movie[0].caratula} alt="" />
         </div>
@@ -52,7 +52,7 @@ export const CinemaSelection = () => {
             </div>
         </div>
         <div className={styles.container__button}>
-            <button><strong>Book now</strong></button>
+            <Link className={styles.link}to="/ChooseSeat">Book now</Link>
         </div>
     </div>
   )

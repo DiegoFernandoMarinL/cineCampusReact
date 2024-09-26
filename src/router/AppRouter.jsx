@@ -4,6 +4,7 @@ import Homeapp from "../components/Homeapp"
 import LogIn from "../components/LogIn"
 import SignUp from "../components/SignUp"
 import CinemaSelection from "../components/CinemaSelection"
+import ChooseSeat from "../components/ChooseSeat"
 
 const AppRouter = () => {
   return (
@@ -13,6 +14,7 @@ const AppRouter = () => {
       <Route path="/SignUp" element={<SignUp />} />
       <Route path="/HomeApp" element={<Homeapp />} />
       <Route path="/CinemaSelection/:id" element={<CinemaSelection />} />
+      <Route path="/ChooseSeat" element={<ChooseSeat />} />
       <Route path="/*" element={<Navigate to="/" />}/>
     </Routes>  
   )

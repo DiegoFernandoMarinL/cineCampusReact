@@ -54,11 +54,18 @@
     font-size: 13px;
     border-radius: 10px;
 }
-.container__button button{
-    background: #f5f5dc;
-    border: 0;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.link{
+    border: none;
+    outline: none;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
     width: 100%;
-    border-radius: 5px;
-    padding: 10px 10px 10px 10px;
+    height: 56px;
+    font-family: "Inter_18pt-SemiBold";
+    font-size: 16px;
+    background: #f5f5dc;
+    color: #111111
 }

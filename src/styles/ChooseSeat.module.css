@@ -1,0 +1,91 @@
+.seatBooking {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.seatSelector {
+    margin: 20px 0;
+}
+
+.seatRow {
+    margin-bottom: 10px;
+}
+.seatRow:nth-child(3) {
+    margin-top: 50px; 
+}
+.seat {
+    width: 32px;
+    height: 32px;
+    margin: 2px;
+    background-color: #4c4c4c;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.seat.available:hover {
+    background-color: beige;
+    color: #000;
+}
+
+.seat.reserved {
+    background-color: #ff0000;
+    cursor: not-allowed;
+}
+
+.seat.selected {
+    background-color: #27ae60;
+}
+
+.dateSelector,
+.timeSelector {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.day,
+.time {
+    background-color: #2c2c2c;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.day.active,
+.time.active {
+    background-color: #ff0000;
+}
+
+.ticketPrice {
+    margin: 20px 0;
+}
+
+.ticketPrice p {
+    font-size: 18px;
+}
+
+.ticketPrice h2 {
+    font-size: 32px;
+}
+
+.buyButton {
+    background-color: #f5f5dc;
+    color: #000;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.buyButton:hover {
+    background-color: #c0392b;
+}
