@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import MoviesOn from './MoviesOn'
 import styles from '../styles/Homeapp.module.css'
 import bell from '../storage/img/bell.svg'
@@ -6,6 +7,8 @@ import profile from '../storage/img/profile.svg'
 import lupa from '../storage/img/lupa.svg'
 
 export const Homeapp = () => {
+  const location = useLocation();
+  const { nombre, apellido } = location.state || {}; 
   const [peliculas, setPelicula] = useState([]);
 
     useEffect(() => {
@@ -26,7 +29,7 @@ export const Homeapp = () => {
       <section className={styles.section__greeting}>
         <img src={profile}/>
         <div className={styles.container__greeting}>
-          <h5>Hi, Ferrucio Tuccine!  </h5>
+          <h5>Hi, {nombre} {apellido}!  </h5>
           <p>Let’s watch movie together!</p>
         </div>
         <img src={bell} />

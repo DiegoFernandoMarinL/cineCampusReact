@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
-import { validarCorreo, validarPassword } from '../utils/validators'
+import { Link, useNavigate } from 'react-router-dom'
 import Facebook from '../storage/img/Facebook.svg'
 import Google from '../storage/img/Google.svg'
 import Apple from '../storage/img/Apple.svg'
@@ -10,32 +9,24 @@ import styles from '../styles/LogIn.module.css'
 const LogIn = () => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
-
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
       e.preventDefault();
-
-      const usuario = {
-        email,
-        pass,
-      };
   
       try {
-        const response = await fetch('http://localhost:5000/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(usuario)
+        const response = await fetch(`http://localhost:5000/validar-login?email=${encodeURIComponent(email)}&pass=${encodeURIComponent(pass)}`, {
+          method: 'GET',
         });
-  
         const data = await response.json();
-        console.log('Usuario creado:', data);
   
         // Limpia el formulario después de enviar
-        setNombre('');
         setEmail('');
         setPass('');
-        navigate('/LogIn');
+        if (data.valido == true){
+          navigate('/Homeapp/', {state: {nombre: data.nombre, apellido: data.apellido}});
+        }else{
+          alert(data.message);  
+        }
       } catch (error) {
         console.error('Error al crear usuario:', error);
       }        
@@ -57,7 +48,6 @@ const LogIn = () => {
                         placeholder="Your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        onBlur={validarCorreo}
                         required
                     />
                     <label For="">Password</label>
@@ -66,7 +56,6 @@ const LogIn = () => {
                         placeholder="Your password"
                         value={pass}
                         onChange={(e) => setPass(e.target.value)}
-                        onBlur={validarPassword}
                         required
                     />
                     <span>Forgot password?</span>

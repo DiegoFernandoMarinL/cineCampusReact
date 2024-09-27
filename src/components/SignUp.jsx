@@ -5,7 +5,7 @@ import logo from '../storage/img/logo1.png'
 import styles from '../styles/SignUp.module.css'
 
 const SignUp = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
     const [nombre, setNombre] = useState('');
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');

@@ -9,7 +9,7 @@ const port = 5000;
 // Middleware
 app.use(cors());
 app.use(express.json()); // Para manejar JSON
-
+//ruta para traer los asientos ocupados
 app.get('/seatOn/:id', async (req, res) => {
   const id = req.params.id;  
   try {
@@ -150,9 +150,9 @@ app.get('/validar-login', async (req, res) => {
       const cliente = await collection.findOne({ email: correo , pass: pass});
 
       if (cliente) {
-        res.json({ valido: true });
+        res.json({ valido: true, nombre: cliente.nombre, apellido: cliente.apellido });
       } else {
-        res.json({ valido: false, mensaje: 'El correo o contraseña no son validos' });
+        res.json({ valido: false, message: 'El correo o contraseña no son validos' });
       }
   } catch (error) {
       console.error('Error al consultar la base de datos:', error);
