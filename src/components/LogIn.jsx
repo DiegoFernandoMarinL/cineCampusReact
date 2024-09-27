@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
+import { validarCorreo, validarPassword } from '../utils/validators'
 import Facebook from '../storage/img/Facebook.svg'
 import Google from '../storage/img/Google.svg'
 import Apple from '../storage/img/Apple.svg'
-import Star from '../storage/img/Star.svg'
+import logo from "../storage/img/logo1.png"
 import styles from '../styles/LogIn.module.css'
 
 const LogIn = () => {
-    const [nombre, setNombre] = useState('');
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
 
@@ -15,7 +15,6 @@ const LogIn = () => {
       e.preventDefault();
 
       const usuario = {
-        nombre,
         email,
         pass,
       };
@@ -45,7 +44,7 @@ const LogIn = () => {
     <>
         <header>
             <div className={styles.header__logo}>
-                <img src={Star}/>
+                <img src={logo}/>
             </div>
         </header>
         <main>

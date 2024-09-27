@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Header from './header'
+import Header from './Header'
 import styles from '../styles/CinemaSelection.module.css'
 import star from '../storage/img/star.png'
 

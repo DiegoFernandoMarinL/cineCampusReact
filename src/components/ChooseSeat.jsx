@@ -1,12 +1,12 @@
-import Header from './header';
+import Header from './Header';
 import screen from '../storage/img/screen.svg'
 import styles from '../styles/ChooseSeat.module.css'
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import SeatSelector from './seatSelector';
-import DateSelector from './dateSelector';
-import TimeSelector from './timeSelector';
-import TicketPrice from './ticketPrice';
+import SeatSelector from './SeatSelector';
+import DateSelector from './DateSelector';
+import TimeSelector from './TimeSelector';
+import TicketPrice from './TicketPrice';
 
 const ChooseSeat = () => {
   const { id_funcion } = useParams();

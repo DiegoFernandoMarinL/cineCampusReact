@@ -92,5 +92,6 @@ header {
 .link:first-child {
     background: #000;
     color: #f5f5dc;
+    border: 1px solid #f5f5dc;
 }
 
