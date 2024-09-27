@@ -107,7 +107,8 @@ app.get('/validar-nombre', async (req, res) => {
   const nombre = req.query.nombre;
 
   try {
-      const collection = await connectMongo();
+      const db = await connectMongo();
+      const collection = db.collection('cliente');
       const cliente = await collection.findOne({ nombre: nombre });
 
       if (cliente) {
@@ -125,7 +126,8 @@ app.get('/validar-correo', async (req, res) => {
   const correo = req.query.email;
 
   try {
-      const collection = await connectMongo();
+      const db = await connectMongo();
+      const collection = db.collection('cliente');
       const cliente = await collection.findOne({ email: correo });
 
       if (cliente) {
@@ -138,12 +140,32 @@ app.get('/validar-correo', async (req, res) => {
       res.status(500).json({ valido: false, mensaje: 'Error en el servidor' });
   }
 });
+//Ruta para validar el correo de un usuario
+app.get('/validar-login', async (req, res) => {
+  const correo = req.query.email;
+  const pass = req.query.pass;
+  try {
+      const db = await connectMongo();
+      const collection = db.collection('cliente');
+      const cliente = await collection.findOne({ email: correo , pass: pass});
+
+      if (cliente) {
+        res.json({ valido: true });
+      } else {
+        res.json({ valido: false, mensaje: 'El correo o contraseña no son validos' });
+      }
+  } catch (error) {
+      console.error('Error al consultar la base de datos:', error);
+      res.status(500).json({ valido: false, mensaje: 'Error en el servidor' });
+  }
+});
 // Ruta para crear un usuario
 app.post('/', async (req, res) => {
   const nuevoUsuario = req.body
   console.log(nuevoUsuario)
   try {
-    const collection = await connectMongo();
+    const db = await connectMongo();
+    const collection = db.collection('cliente');
       // Conectar a la base de datos
     const usuarios = await collection.insertOne(nuevoUsuario);
     /* const usuarioDB = await collection.createUser() */
