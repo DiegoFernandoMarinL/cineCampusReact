@@ -23,6 +23,10 @@ const LogIn = () => {
         setEmail('');
         setPass('');
         if (data.valido == true){
+          const fechaExpiracion = new Date();
+          fechaExpiracion.setTime(fechaExpiracion.getTime() + (10 * 60 * 1000)); // Expira en 10 minutos
+          document.cookie = `usuario=${data.nombre}; expires=${fechaExpiracion.toUTCString()}; path=/`;
+
           navigate('/Homeapp/', {state: {nombre: data.nombre, apellido: data.apellido}});
         }else{
           alert(data.message);  
