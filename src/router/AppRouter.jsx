@@ -40,7 +40,6 @@ const AppRouter = () => {
           </ProtectedRoute>
         }
       />
-
       {/* Redireccionar cualquier otra ruta a Home */}
       <Route path="/*" element={<Navigate to="/" />} />
     </Routes>

@@ -1,6 +1,6 @@
 import Header from './Header';
-import screen from '../storage/img/screen.svg'
-import styles from '../styles/ChooseSeat.module.css'
+import screen from '../storage/img/screen.svg';
+import styles from '../styles/ChooseSeat.module.css';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SeatSelector from './SeatSelector';
@@ -10,7 +10,7 @@ import TicketPrice from './TicketPrice';
 
 const ChooseSeat = () => {
   const { id_funcion } = useParams();
-  const [selectedSeat, setSelectedSeat] = useState(null);
+  const [selectedSeats, setSelectedSeats] = useState([]); // Inicializado como array vacío
   const [selectedDay, setSelectedDay] = useState('Fri 17');
   const [selectedTime, setSelectedTime] = useState('13:00');
   const [seat, setSeat] = useState([]);
@@ -31,11 +31,11 @@ const ChooseSeat = () => {
             const response = await fetch(`http://localhost:5000/seatOn/${id_funcion}`);
             const data = await response.json(); 
             setSeat(data); // Guarda los datos en el estado  
-          } catch (error) {
+        } catch (error) {
             console.error('Error al obtener los asientos de la funcion:', error);
-          }
-        };
-        fetchSeat(); // Ejecutamos la función
+        }
+    };
+    fetchSeat(); // Ejecutamos la función
   }, [id_funcion]); 
 
   useEffect(() => {
@@ -46,15 +46,27 @@ const ChooseSeat = () => {
 
   const reservedSeats = seat.length > 0 ? seat[0].asientos_ocupados : [];
 
+  const handleSeatClick = (seat) => {
+    setSelectedSeats((prevSelectedSeats) => {
+      if (prevSelectedSeats.includes(seat)) {
+        // Si el asiento ya está seleccionado, lo quitamos
+        return prevSelectedSeats.filter((s) => s !== seat);
+      } else {
+        // Si no está seleccionado, lo añadimos
+        return [...prevSelectedSeats, seat];
+      }
+    });
+  };
+
   return (
     <div className={styles.seatBooking}>
-      <Header text={"Choose Seat"}/>
-      <img src={screen} alt="" />
+      <Header text={"Choose Seat"} />
+      <img src={screen} alt="Screen" />
       <SeatSelector 
         seats={seats} 
-        reservedSeats={reservedSeats} 
-        selectedSeat={selectedSeat} 
-        onSeatClick={setSelectedSeat} 
+        reservedSeats={reservedSeats}  // Asegúrate de que reservedSeats siempre sea un array
+        selectedSeats={selectedSeats} // Asegúrate de usar plural
+        onSeatClick={handleSeatClick} 
       />
       <DateSelector selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
       <TimeSelector selectedTime={selectedTime} setSelectedTime={setSelectedTime} />

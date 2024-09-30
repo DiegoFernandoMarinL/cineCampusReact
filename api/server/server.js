@@ -175,6 +175,22 @@ app.post('/', async (req, res) => {
     res.status(500).send('Error en el servidor');
   }
 });
+// Ruta para comprar un ticket
+app.post('/buyTicket', async (req, res) => {
+  const nuevoUsuario = req.body
+  console.log(nuevoUsuario)
+  try {
+    const db = await connectMongo();
+    const collection = db.collection('cliente');
+      // Conectar a la base de datos
+    const usuarios = await collection.insertOne(nuevoUsuario);
+    /* const usuarioDB = await collection.createUser() */
+    res.status(200).json(usuarios);
+  } catch (error) {
+    console.error('Error al insertar usuario:', error);
+    res.status(500).send('Error en el servidor');
+  }
+});
 // Iniciar el servidor
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`);

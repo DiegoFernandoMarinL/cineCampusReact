@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../styles/ChooseSeat.module.css'
 
-const SeatSelector = ({ seats, reservedSeats, selectedSeat, onSeatClick }) => {
+const SeatSelector = ({ seats, reservedSeats, selectedSeats = [], onSeatClick }) => { // Asignación por defecto a selectedSeats
   return (
     <div className={styles.seatSelector}>
       {seats.map((row, rowIndex) => (
@@ -9,7 +9,11 @@ const SeatSelector = ({ seats, reservedSeats, selectedSeat, onSeatClick }) => {
           {row.map((seat) => (
             <button
               key={seat}
-              className={`${styles.seat} ${reservedSeats.includes(seat) ? styles.reserved : selectedSeat === seat ? styles.selected : styles.available}`}
+              className={` 
+                ${styles.seat} 
+                ${reservedSeats.includes(seat) ? styles.reserved : ''} 
+                ${selectedSeats && selectedSeats.includes(seat) ? styles.selected : styles.available} 
+              `}
               onClick={() => !reservedSeats.includes(seat) && onSeatClick(seat)}
               disabled={reservedSeats.includes(seat)}
             >
@@ -23,3 +27,5 @@ const SeatSelector = ({ seats, reservedSeats, selectedSeat, onSeatClick }) => {
 };
 
 export default SeatSelector;
+
+
