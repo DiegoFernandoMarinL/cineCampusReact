@@ -176,19 +176,35 @@ app.post('/', async (req, res) => {
   }
 });
 // Ruta para comprar un ticket
-app.post('/buyTicket', async (req, res) => {
-  const nuevoUsuario = req.body
-  console.log(nuevoUsuario)
+app.post('/confirmSeats', async (req, res) => {
+  const { id_funcion, selectedSeats } = req.body;
+  console.log(id_funcion);
+  
+  // Validación de entrada
+  if (!id_funcion || !Array.isArray(selectedSeats) || selectedSeats.length === 0) {
+    return res.status(400).json({ error: 'Datos inválidos o faltantes' });
+  }
+
   try {
     const db = await connectMongo();
-    const collection = db.collection('cliente');
-      // Conectar a la base de datos
-    const usuarios = await collection.insertOne(nuevoUsuario);
-    /* const usuarioDB = await collection.createUser() */
-    res.status(200).json(usuarios);
+    const collection = db.collection('funcion');
+
+    // Actualización de los asientos seleccionados, cambiando el estado a "ocupado"
+    const result = await collection.updateOne(
+      { _id: new ObjectId(id_funcion), "asiento.codigo": { $in: selectedSeats } },  // Buscar la función y los asientos
+      { $set: { "asiento.$[elem].estado": "ocupado" } },  // Cambia el estado a "ocupado"
+      { arrayFilters: [{ "elem.codigo": { $in: selectedSeats } }] }  // Filtrar los asientos por código
+    );
+
+    // Si no se encuentra la función
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Función o asientos no encontrados' });
+    }
+
+    res.json({ message: 'Asientos actualizados exitosamente', selectedSeats });
   } catch (error) {
-    console.error('Error al insertar usuario:', error);
-    res.status(500).send('Error en el servidor');
+    console.error('Error al actualizar los asientos:', error);
+    res.status(500).json({ error: 'Error del servidor al actualizar los asientos' });
   }
 });
 // Iniciar el servidor

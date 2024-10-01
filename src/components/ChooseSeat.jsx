@@ -70,7 +70,7 @@ const ChooseSeat = () => {
       />
       <DateSelector selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
       <TimeSelector selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
-      <TicketPrice price="$24.99" />
+      <TicketPrice id_funcion={id_funcion} selectedSeats={selectedSeats} price="$24.99" />
     </div>
   );
 };
