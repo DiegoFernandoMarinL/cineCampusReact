@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 
 exports.connectMongo = async()=> {
     //const url = `${process.env.MONGO_PROTOCOLO}${process.env.MONGO_USER}:${process.env.MONGO_PSW}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`
-    const url = 'mongodb://localhost@10.0.0.145:27017/'
+    const url = 'mongodb://root:campus2023@172.16.102.139:27017/'
     //const url = 'mongodb://localhost:27017/'
     const client = new MongoClient(url);
     await client.connect();
